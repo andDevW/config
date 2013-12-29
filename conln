@@ -1,0 +1,11 @@
+#!/bin/bash
+
+src=$(realpath $1)
+src_name=$(basename $1)
+
+target=$HOME/workspace/config/$src_name
+
+mv $src $HOME/workspace/config/
+ln -s $target $src
+
+git add $target
