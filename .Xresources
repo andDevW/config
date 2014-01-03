@@ -1,0 +1,12 @@
+*background: #242424
+*foreground: #efefef
+*color4: #70c6f2
+*color12: #70c6f2
+
+URxvt.scrollBar: false
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+URxvt*saveLines: 65535
+URxvt*font: xft:SourceCodePro:pixelsize=15:weight=light
+Emacs.font: SourceCodePro-11
