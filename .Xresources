@@ -8,5 +8,4 @@ URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
 URxvt*saveLines: 65535
-URxvt*font: xft:SourceCodePro:pixelsize=15:weight=light
-Emacs.font: SourceCodePro-11
+URxvt*font: xft:Ubuntu Mono:pixelsize=19:regular
