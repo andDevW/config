@@ -149,6 +149,25 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# media
+bindsym F12 exec ~/.local/bin/volume_up
+bindsym F11 exec ~/.local/bin/volume_down
+bindsym F10 exec ~/.local/bin/volume_toggle
+
+mode "media" {
+     # bindsym j
+     bindsym k exec --no-startup-id ~/.local/bin/volume_down
+     bindsym l exec --no-startup-id ~/.local/bin/volume_up
+     # bindsym semicolon
+
+     bindsym 0 exec --no-startup-id ~/.local/bin/volume_toggle
+
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
+}
+
+bindsym $mod+m mode "media"
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {

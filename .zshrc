@@ -34,8 +34,8 @@ setopt completealiases
 autoload -U promptinit && promptinit
 autoload -U colors && colors
 
-PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg_no_bold[green]%}%1~ %{$reset_color%}%# "
-RPROMPT="[%{$fg_no_bold[green]%}%?%{$reset_color%}]"
+PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg_no_bold[green]%}%1~ %{$reset_color%}[%{$fg_no_bold[green]%}%?%{$reset_color%}] %# "
+RPROMPT=""
 
 # Cool aliases and things
 alias -s zip='unzip'
