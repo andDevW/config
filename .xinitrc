@@ -1,3 +1,3 @@
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 xmodmap ~/.Xmodmap
-exec wmii
+exec i3

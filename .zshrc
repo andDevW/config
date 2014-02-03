@@ -19,6 +19,7 @@ alias ec=emacsclient -c
 alias vim=emacsclient -t
 alias vi=emacsclient -t
 alias mvn3=/home/gregg/workspace/apache-maven-3.0.5/apache-maven/target/apache-maven-3.0.5/bin/mvn
+alias trayer=trayer --edge top
 
 alias -s csv=libreoffice
 alias -s rtf=abiword
