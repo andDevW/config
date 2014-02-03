@@ -162,6 +162,13 @@ mode "media" {
 
      bindsym 0 exec --no-startup-id ~/.local/bin/volume_toggle
 
+     # play/pause
+     bindsym --release space exec --no-startup-id xdotool key --clearmodifiers XF86AudioPlay
+
+     # next/prev
+     bindsym --release j exec --no-startup-id xdotool key --clearmodifiers XF86AudioPrev
+     bindsym --release semicolon exec --no-startup-id xdotool key --clearmodifiers XF86AudioNext
+
      bindsym Return mode "default"
      bindsym Escape mode "default"
 }
