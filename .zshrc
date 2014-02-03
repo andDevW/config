@@ -29,6 +29,18 @@ alias -s ppt=libreoffice
 alias -s pptx=libreoffice
 alias -s pdf=okular
 
+# lucid vpn
+alias lucidvpn="sudo openvpn --config /etc/openvpn/lucid.conf"
+
+# lucid clear local
+alias lucidrm="rm -rf /opt/play-2.1.1/repository/*/com.lucidchart/*; rm -rf ~/.ivy2/*/com.lucidchart/*"
+
+# quick cd
+alias cd-chromechart="cd ~/workspace/chart/extensions/chrome/chrome-app"
+alias cd-chart-cake="cd ~/workspace/chart/cake"
+alias cd-chart-js="cd ~/workspace/chart/cake/app/webroot/js"
+alias cd-chart-css="cd ~/workspace/chart/cake/app/webroot/css"
+
 setopt completealiases
 
 autoload -U promptinit && promptinit
@@ -45,7 +57,7 @@ export GOPATH=~/workspace/go
 export GOBIN=~/workspace/go/bin
 
 
-source ~/.gozsh
+#source ~/.gozsh
 
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.gem/ruby/2.0.0/bin
