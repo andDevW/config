@@ -1,0 +1,2 @@
+#!/usr/bin/zsh
+amixer -c 1 set Master 3-

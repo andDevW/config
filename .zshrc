@@ -1,68 +1,80 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/gregg/.zshrc'
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="robbyrussell"
 
-setopt HIST_IGNORE_DUPS
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-export EDITOR="emacsclient -t"
-alias e=emacsclient -t
-alias ec=emacsclient -c
-alias vim=emacsclient -t
-alias vi=emacsclient -t
-alias mvn3=/home/gregg/workspace/apache-maven-3.0.5/apache-maven/target/apache-maven-3.0.5/bin/mvn
-alias trayer=trayer --edge top
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
 
-alias -s csv=libreoffice
-alias -s rtf=abiword
-alias -s doc=abiword
-alias -s docx=libreoffice
-alias -s ppt=libreoffice
-alias -s pptx=libreoffice
-alias -s pdf=okular
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
 
-setopt completealiases
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
 
-autoload -U promptinit && promptinit
-autoload -U colors && colors
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg_no_bold[green]%}%1~ %{$reset_color%}[%{$fg_no_bold[green]%}%?%{$reset_color%}] %# "
-RPROMPT=""
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-# Cool aliases and things
-alias -s zip='unzip'
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
 
-# Path and other env
-export GOPATH=~/workspace/go
-export GOBIN=~/workspace/go/bin
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
 
-source ~/.gozsh
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/.gem/ruby/2.0.0/bin
-export ANDROID_HOME=/opt/android-sdk
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git battery colored-man common-aliases cp emacs sbt scala sudo)
 
-export PATH=$PATH:/usr/lib/smlnj/bin
+source $ZSH/oh-my-zsh.sh
 
-# bc
-export BC_ENV_ARGS=$HOME/.bcrc
+# User configuration
 
-# rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+export PATH="/home/gregg/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/gregg/.local/bin:/home/gregg/.gem/ruby/2.0.0/bin:/usr/lib/smlnj/bin:/home/gregg/.rvm/bin:/home/gregg/.rvm/bin"
+# export MANPATH="/usr/local/man:$MANPATH"
+export PATH=$PATH:"/home/gregg/.cabal/bin"
 
-# show path in titlebar
-WMII_IS_RUNNING=`ps a | grep wmii | awk '/[^"grep"] wmii$/'`
-if [ -n "$WMII_IS_RUNNING" ]; then
-    PROMPT_COMMAND='dirs | wmiir /client/sel/label'
-fi
+export JAVA_HOME="/usr/lib/jvm/java-6-openjdk-amd64"
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+export EDITOR='emacsclient -c'
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+                  

@@ -1,0 +1,10 @@
+#!/bin/bash
+exedir="/home/gregg/.local/lib/ghc-7.8.3/bin"
+exeprog="haddock"
+executablename="$exedir/$exeprog"
+datadir="/home/gregg/.local/share"
+bindir="/home/gregg/.local/bin"
+topdir="/home/gregg/.local/lib/ghc-7.8.3"
+#!/bin/sh
+
+exec "$executablename" -B"$topdir" -l"$topdir" ${1+"$@"}

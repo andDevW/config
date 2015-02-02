@@ -1,0 +1,117 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/gregg/.zshrc'
+
+
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+zstyle ':completion:*' menu select=2
+
+setopt HIST_IGNORE_DUPS
+
+launch_emacsclient() {
+    running=$(ps aux | grep "emacs --daemo[n]" | wc -l)
+    if [ $running -eq 0 ]; then
+        urxvt -e emacs --daemon
+    fi
+    emacsclient "$0"
+}
+
+export EDITOR="emacsclient -t"
+alias e=emacsclient -t
+alias ec=emacsclient -c
+alias ed="emacs --daemon"
+alias vim=emacsclient -t
+alias vi=emacsclient -t
+alias mvn3=/home/gregg/workspace/apache-maven-3.0.5/apache-maven/target/apache-maven-3.0.5/bin/mvn
+alias trayer=trayer --edge top
+alias rr=~/arandr-0.1.7.1/arandr
+alias lucid-rm="rm -rf ~/.ivy2/{cache,local}/com.lucidchart/; rm -rf /opt/play-2.1.1/repository/{cache,local}/com.lucidchart/"
+#alias sbt="rlwrap -a sbt"
+
+alias -s csv=libreoffice
+alias -s rtf=abiword
+alias -s doc=abiword
+alias -s docx=libreoffice
+alias -s ppt=libreoffice
+alias -s pptx=libreoffice
+alias -s pdf=okular
+
+setopt completealiases
+
+autoload -U promptinit && promptinit
+autoload -U colors && colors
+
+source /home/gregg/workspace/config/zshrc.sh
+
+PROMPT='[%{$fg_no_bold[green]%}%?%{$reset_color%}] %m %~ %b$(git_super_status) %# '
+#PROMPT="[%{$fg_no_bold[green]%}%?%{$reset_color%}] %{$fg_no_bold[red]%}%1~%b$(git_super_status) %# "
+RPROMPT=""
+
+# Cool aliases and things
+alias -s zip='unzip'
+
+# Path and other env
+export GOPATH=~/workspace/go
+export GOBIN=~/workspace/go/bin
+
+
+#source ~/.gozsh
+
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.gem/ruby/2.0.0/bin
+export ANDROID_HOME=/opt/android-sdk
+
+export PATH=$PATH:/usr/lib/smlnj/bin
+
+export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64
+
+# bc
+export BC_ENV_ARGS=$HOME/.bcrc
+
+# rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# show path in titlebar
+## nothing yet
+
+DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+    dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+    [[ -d $dirstack[1] ]] && cd $dirstack[1]
+fi
+chpwd() {
+    print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
+
+DIRSTACKSIZE=20
+
+setopt autopushd pushdsilent pushdtohome
+
+## Remove duplicate entries
+setopt pushdignoredups
+
+## This reverts the +/- operators.
+setopt pushdminus
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+## NIX ##
+
+source $HOME/.nix-profile/etc/profile.d/nix.sh
+
+## LUCID HELPERS ##
+
+lucid-clear-ivy() {
+    package=$1
+    rm -rf $HOME/.ivy2/cache/com.lucidchart/${package}_2.1*
+    rm -rf $HOME/.ivy2/local/com.lucidchart/${package}_2.1*
+}

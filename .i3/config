@@ -9,7 +9,11 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+#exec --no-startup-id compton -cCGb --backend glx --vsync opengl
+
 set $mod Mod4
+exec --no-startup-id xsetroot -solid "#000000"
+
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -24,7 +28,11 @@ font pango:Roboto Light 10
 floating_modifier $mod
 
 # start a terminal
+#bindsym $mod+Return exec --no-startup-id emacsclient -c -a "" -e '(ansi-term "zsh")'
 bindsym $mod+Return exec --no-startup-id urxvt
+
+# @TODO: make this work
+bindsym $mod+Shift+Escape exec --no-startup-id sudo pm-suspend
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -35,6 +43,30 @@ bindsym $mod+d exec dmenu_run
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# make everything into emacs
+bindsym Ctrl+a exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh KP_Home "ctrl+a"
+bindsym Ctrl+b exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh KP_Left "ctrl+b"
+bindsym Ctrl+d exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh KP_Delete "ctrl+d"
+bindsym Ctrl+e exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh KP_End "ctrl+e"
+bindsym Ctrl+f exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh KP_Right "ctrl+f"
+bindsym Ctrl+k exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+x" "ctrl+k" # @TODO: make this a real kill
+bindsym Ctrl+n exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh KP_Down "ctrl+n"
+bindsym Ctrl+p exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh KP_Up "ctrl+p"
+bindsym Ctrl+w exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+x" "ctrl+w"
+bindsym Ctrl+y exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+v" "ctrl+y"
+
+# turn the above things into CMD+
+bindsym $mod+a exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+a" "Super_L+a"
+bindsym $mod+b exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+b" "Super_L+b"
+#bindsym $mod+d exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+d" "Super_L+d"
+bindsym $mod+f exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+f" "Super_L+f"
+#bindsym $mod+k exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+k" "Super_L+k"
+bindsym $mod+n exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+n" "Super_L+n"
+bindsym $mod+p exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+p" "Super_L+p"
+bindsym $mod+r exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+r" "Super_L+r"
+bindsym $mod+t exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+t" "Super_L+t"
+bindsym $mod+w exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+w" "Super_L+w"
 
 # change focus
 bindsym $mod+j focus left
@@ -54,6 +86,10 @@ bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
+# move workspace
+bindsym $mod+Shift+p move workspace to output right
+bindsym $mod+Shift+o move workspace to output left
+
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
@@ -67,11 +103,11 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
+#bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+bindsym $mod+Shift+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -81,7 +117,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -111,10 +147,15 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # floating windows
-for_window [class="Google-chrome-stable" instance="crx_nckgahadagoaajjgafhacjanaoiihapd"] floating enable # Hangouts
+for_window [class="Google-chrome" instance="crx_nckgahadagoaajjgafhacjanaoiihapd"] floating enable # Hangouts
+assign [class="Google-chrome" instance="crx_nckgahadagoaajjgafhacjanaoiihapd"] 5
+
+for_window [class="Chromium-browser" instance="crx_nckgahadagoaajjgafhacjanaoiihapd"] floating enable # Hangouts
+assign [class="Chromium-browser" instance="crx_nckgahadagoaajjgafhacjanaoiihapd"] 5
 
 force_focus_wrapping yes
 workspace_auto_back_and_forth yes
+workspace_layout tabbed
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -122,32 +163,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-bindsym $mod+r mode "resize"
 
 # media
 bindsym F12 exec ~/.local/bin/volume_up
@@ -175,8 +190,25 @@ mode "media" {
 
 bindsym $mod+m mode "media"
 
+bindsym $mod+Shift+Delete exec i3lock --color 000000
+
+mode "screens" {
+     bindsym 1 exec ~/.screenlayout/no-external.sh
+     bindsym 2 exec ~/.screenlayout/1080.sh
+     bindsym 3 exec ~/.screenlayout/two-dells.sh
+
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+s mode "screens"
+
+bindsym $mod+F1 exec xmodmap ~/.Xmodmap
+
+bindsym $mod+c exec emacsclient -c
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+    status_command i3status
 }

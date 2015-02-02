@@ -8,5 +8,10 @@ URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
 URxvt*saveLines: 65535
-URxvt*font: xft:SourceCodePro:pixelsize=15:weight=light
-Emacs.font: SourceCodePro-11
+URxvt*font: xft:Source Code Pro:pixelsize=15:weight=light
+
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.iso14755: False
+URxvt.perl-ext-common: default,clipboard
+
+Emacs.font: Source Code Pro-11
