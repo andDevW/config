@@ -1,4 +1,4 @@
-#!/usr/local/bin/zsh
+#!/bin/zsh
 
 winid=$(xdotool getactivewindow)
 is_browser=$(xprop -id $winid WM_CLASS | grep -ci "\(chrom\|firefox\)")
