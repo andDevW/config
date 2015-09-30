@@ -9,11 +9,9 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-#exec --no-startup-id compton -cCGb --backend glx --vsync opengl
-
 set $mod Mod4
 exec --no-startup-id xsetroot -solid "#000000"
-
+exec --no-startup-id nm-applet
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -28,10 +26,8 @@ font pango:Roboto Light 10
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec --no-startup-id emacsclient -c -a "" -e '(ansi-term "zsh")'
 bindsym $mod+Return exec --no-startup-id urxvt
 
-# @TODO: make this work
 bindsym $mod+Shift+Escape exec --no-startup-id sudo pm-suspend
 
 # kill focused window
@@ -67,18 +63,13 @@ bindsym $mod+p exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh 
 bindsym $mod+r exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+r" "Super_L+r"
 bindsym $mod+t exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+t" "Super_L+t"
 bindsym $mod+w exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+w" "Super_L+w"
+bindsym $mod+k exec --no-startup-id /home/gregg/workspace/config/.i3/kb-bind.sh "ctrl+k" "Super_L+k"
 
 # change focus
 bindsym $mod+j focus left
-bindsym $mod+k focus down
+#bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+j move left
@@ -100,7 +91,7 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+# bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 #bindsym $mod+f fullscreen
@@ -114,7 +105,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 #bindsym $mod+a focus parent
@@ -153,6 +144,14 @@ assign [class="Google-chrome" instance="crx_nckgahadagoaajjgafhacjanaoiihapd"] 5
 for_window [class="Chromium-browser" instance="crx_nckgahadagoaajjgafhacjanaoiihapd"] floating enable # Hangouts
 assign [class="Chromium-browser" instance="crx_nckgahadagoaajjgafhacjanaoiihapd"] 5
 
+for_window [class="X-www-browser" instance="crx_nckgahadagoaajjgafhacjanaoiihapd"] floating enable # Hangouts
+assign [class="X-www-browser" instance="crx_nckgahadagoaajjgafhacjanaoiihapd"] 5
+
+workspace 1 output eDP2
+workspace 2 output VGA1
+workspace 3 output HDMI1
+workspace 5 output eDP2
+
 force_focus_wrapping yes
 workspace_auto_back_and_forth yes
 workspace_layout tabbed
@@ -169,14 +168,17 @@ bindsym F12 exec ~/.local/bin/volume_up
 bindsym F11 exec ~/.local/bin/volume_down
 bindsym F10 exec ~/.local/bin/volume_toggle
 
+bindsym XF86AudioRaiseVolume exec ~/.local/bin/volume_up
+bindsym XF86AudioLowerVolume exec ~/.local/bin/volume_down
+bindsym XF86AudioMute exec ~/.local/bin/volume_toggle
+
+bindsym XF86MonBrightnessDown exec light -U 15
+bindsym XF86MonBrightnessUp exec light -A 15
+
+bindsym KP_Up exec light -A 3
+bindsym KP_Down exec light -U 3
+
 mode "media" {
-     # bindsym j
-     bindsym k exec --no-startup-id ~/.local/bin/volume_down
-     bindsym l exec --no-startup-id ~/.local/bin/volume_up
-     # bindsym semicolon
-
-     bindsym 0 exec --no-startup-id ~/.local/bin/volume_toggle
-
      # play/pause
      bindsym --release space exec --no-startup-id xdotool key --clearmodifiers XF86AudioPlay
 
@@ -188,14 +190,22 @@ mode "media" {
      bindsym Escape mode "default"
 }
 
+# nuvola things
+bindsym $mod+Right exec --no-startup-id nuvolaplayer3ctl action next-song
+bindsym $mod+Left exec --no-startup-id nuvolaplayer3ctl action prev-song
+bindsym $mod+Up exec --no-startup-id nuvolaplayer3ctl action thumbs-up
+bindsym $mod+Down exec --no-startup-id nuvolaplayer3ctl action thumbs-down
+bindsym $mod+backslash exec --no-startup-id nuvolaplayer3ctl action toggle-play
+
 bindsym $mod+m mode "media"
 
 bindsym $mod+Shift+Delete exec i3lock --color 000000
 
 mode "screens" {
-     bindsym 1 exec ~/.screenlayout/no-external.sh
-     bindsym 2 exec ~/.screenlayout/1080.sh
-     bindsym 3 exec ~/.screenlayout/two-dells.sh
+     bindsym 1 exec ~/.screenlayout/one.sh
+     bindsym 2 exec ~/.screenlayout/mirrored-hdmi.sh
+     bindsym 3 exec ~/.screenlayout/mirrored-vga.sh
+     bindsym 4 exec ~/.screenlayout/three.sh
 
      bindsym Return mode "default"
      bindsym Escape mode "default"
@@ -205,7 +215,7 @@ bindsym $mod+Shift+s mode "screens"
 
 bindsym $mod+F1 exec xmodmap ~/.Xmodmap
 
-bindsym $mod+c exec emacsclient -c
+bindsym $mod+space exec --no-startup-id /home/gregg/.local/bin/emacs-daemon
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

@@ -1,2 +1,2 @@
 #!/usr/bin/zsh
-amixer -c 1 set Master 3+
+pactl set-sink-volume $(pactl info | grep "Default Sink" | sed "s/Default Sink: //") +10%

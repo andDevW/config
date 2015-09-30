@@ -23,7 +23,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -45,23 +45,25 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git battery colored-man common-aliases cp emacs sbt scala sudo)
+plugins=(git battery colored-man common-aliases cp sbt scala sudo)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/home/gregg/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/gregg/.local/bin:/home/gregg/.gem/ruby/2.0.0/bin:/usr/lib/smlnj/bin:/home/gregg/.rvm/bin:/home/gregg/.rvm/bin"
+export PATH="/home/gregg/.stack/programs/x86_64-linux/ghc-7.8.4/bin:/home/gregg/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/gregg/.local/bin:/home/gregg/.gem/ruby/2.0.0/bin:/usr/lib/smlnj/bin:/home/gregg/.rvm/bin:/home/gregg/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH=$PATH:"/home/gregg/.cabal/bin"
 
-export JAVA_HOME="/usr/lib/jvm/java-6-openjdk-amd64"
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 export EDITOR='emacsclient -c'
+
+zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -77,4 +79,5 @@ export EDITOR='emacsclient -c'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-                  
+
+alias scala=amm

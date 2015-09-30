@@ -3,6 +3,17 @@
 *color4: #70c6f2
 *color12: #70c6f2
 
+URxvt.perl-ext-common: default,matcher,font-size,clipboard
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! OS X style copy/paste. requires: https://github.com/muennich/urxvt-perls/blob/master/clipboard
+URxvt.keysym.Mod4-c: perl:clipboard:copy
+URxvt.keysym.Mod4-v: perl:clipboard:paste
+URxvt.clipboard.copycmd:  xclip -i -selection clipboard
+URxvt.clipboard.pastecmd: xclip -o -selection clipboard
+
 URxvt.scrollBar: false
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
@@ -10,8 +21,21 @@ URxvt*scrollTtyKeypress: true
 URxvt*saveLines: 65535
 URxvt*font: xft:Source Code Pro:pixelsize=15:weight=light
 
-URxvt.keysym.Shift-Control-V: perl:clipboard:paste
-URxvt.iso14755: False
-URxvt.perl-ext-common: default,clipboard
+! scroll in less directly rather than the terminal itself
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+
+!URxvt.letterSpace: -1
+
+! open links in chrome and make them blue
+URxvt.url-launcher: /usr/bin/google-chrome
+URxvt.matcher.button: 1
+URxvt.colorUL: #4682B4
+
+! change font size on the fly. Requires: https://github.com/majutsushi/urxvt-font-size
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
 
 Emacs.font: Source Code Pro-11

@@ -9,7 +9,7 @@ endColor='\e[0m'
 cd $root
 
 buildSbts=$(find . -name "build.sbt" -exec dirname {} \; | grep -v "\.ensime_cache")
-buildScalas=$(find . -name "Build.scala" -exec dirname {} \; | grep -n "\.ensime_cache" | sed s/project//)
+buildScalas=$(find . -name "Build.scala" -exec dirname {} \; | grep -v "\.ensime_cache" | sed s/project//)
 
 paths="$(echo $buildSbts) $(echo $buildScalas)"
 

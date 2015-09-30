@@ -1,12 +1,2 @@
 #!/usr/bin/zsh
-master=$(amixer -c 1 get Master)
-
-master_muted=$(echo $master | grep -o '\[off\]')
-
-if [[ -z $master_muted ]]; then
-    amixer -c 1 set Master mute
-    amixer -c 1 set Headphone mute
-else
-    amixer -c 1 set Master unmute
-    amixer -c 1 set Headphone unmute
-fi
+pactl set-sink-mute $(pactl info | grep "Default Sink" | sed "s/Default Sink: //") toggle
