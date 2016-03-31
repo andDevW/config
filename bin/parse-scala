@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+adhoc-scala -Xprint:parser -Ystop-after:parser $*

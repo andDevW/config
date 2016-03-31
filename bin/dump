@@ -1,0 +1,3 @@
+#!/bin/bash
+
+lucid-prod dump name:conversion | for

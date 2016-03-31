@@ -1,0 +1,18 @@
+#!/bin/bash
+
+randStr() {
+    date +%s | sha256sum | base64 | head -c 32 ; echo
+}
+
+path="http://localhost:9008/api/actions"
+
+xml() {
+    echo "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?><actions><action-record><created>$(date +%s)</created><person-id>321</person-id><person-type>1</person-type><action>saveDocument</action><groups><group><name>product</name><value>chart</value></group></groups></action-record><action-record><created>$(date +%s)</created><person-id>654</person-id><person-type>1</person-type><action>saveDocument</action><groups><group><name>product</name><value>chart</value></group></groups></action-record><action-record><created>$(date +%s)</created><person-id>987</person-id><person-type>1</person-type><action>saveDocument</action><groups><group><name>product</name><value>chart</value></group></groups></action-record></actions>"
+}
+
+while true; do
+    x=$(xml)
+    echo $x
+    echo $x | curl -H "Content-type: text/xml" -d @- -X PUT $path &
+    sleep 0.2s
+done

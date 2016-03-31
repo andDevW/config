@@ -1,0 +1,2 @@
+#!/bin/bash
+AWS_DEFAULT_PROFILE=causegood aws "$0"

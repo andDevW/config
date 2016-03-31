@@ -7,4 +7,5 @@ if [ $is_browser -eq 1 ]; then
     xdotool getactivewindow key $1
 else
     xdotool getactivewindow key $2
+    xdotool windowactivate $winid
 fi

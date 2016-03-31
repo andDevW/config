@@ -1,0 +1,11 @@
+#!/usr/bin/zsh
+source /home/gregg/.zshrc
+if pgrep -x emacs; then
+    emacsclient -c . &!
+else
+    echo "it's not running"
+    urxvt -e zsh -c "/home/gregg/.local/bin/emacs --daemon; sleep 1"
+    emacsclient -c . &!
+fi
+
+#

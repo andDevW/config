@@ -23,7 +23,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -51,7 +51,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/home/gregg/.stack/programs/x86_64-linux/ghc-7.8.4/bin:/home/gregg/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/gregg/.local/bin:/home/gregg/.gem/ruby/2.0.0/bin:/usr/lib/smlnj/bin:/home/gregg/.rvm/bin:/home/gregg/.rvm/bin"
+export PATH="/home/gregg/.stack/programs/x86_64-linux/ghc-7.8.4/bin:/home/gregg/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/gregg/.local/bin:/home/gregg/.gem/ruby/2.0.0/bin:/usr/lib/smlnj/bin:/home/gregg/.rvm/bin:/home/gregg/.rvm/bin:/home/gregg/.local/activator-dist-1.3.7"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH=$PATH:"/home/gregg/.cabal/bin"
 
@@ -80,4 +80,12 @@ zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export GOROOT=/home/gregg/.local/go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=/home/gregg/gowork
+
+export ANDROID_HOME=/home/gregg/Android/Sdk
+
 alias scala=amm
+alias ag="ag --pager=\"less -R -S\""
+alias lucid-vpn="sudo openvpn --config /etc/openvpn/lucid.conf --log /tmp/lucid-vpn.log --daemon"

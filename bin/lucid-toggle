@@ -1,0 +1,122 @@
+#!/usr/bin/python
+
+import sys
+
+root = '/var/lucid/main'
+services = set([
+    'activity-service',
+    'admin',
+    'admin2',
+    'analytics-service',
+    'chart-database-manager',
+    'chart-web',
+    'conversion-service',
+    'document-service',
+    'event-service',
+    'font-service',
+    'image-service',
+    'mailing-service',
+    'pdf-service',
+    'reporting-service',
+    'spelling-service',
+    'user-service',
+    'visio-service'
+])
+
+editorDeps = set([
+    'chart-web',
+    'document-service',
+    'event-service',
+    'font-service',
+    'image-service',
+    'pdf-service',
+    'user-service',
+    'visio-service',
+    'spelling-service',
+    'analytics-service'
+])
+
+reportingsDeps = set([
+    'analytics-service',
+    'reporting-service',
+    'user-service'
+])
+
+def writeSetting(project, start):
+    f = open(root + '/' + project + '/.play-tmux', 'w')
+    if start:
+        f.write('export START_PLAY=yes\n')
+    else:
+        f.write('export START_PLAY=no\n')
+
+def isEnabled(project):
+    with open(root + '/' + project + '/.play-tmux', 'r') as f:
+        content = f.read()
+        return 'export START_PLAY=yes' in content
+    return False
+
+def disable(args):
+    if len(args) < 1:
+        print 'missing service name (eg. reporting-service)'
+        sys.exit(1)
+    writeSetting(args[0], False)
+    print args[0] + ' disabled.'
+
+def disableAll():
+    for service in services:
+        disable([service])
+
+def enable(args):
+    if len(args) < 1:
+        print 'missing service name (eg. reporting-service)'
+        sys.exit(1)
+    writeSetting(args[0], True)
+    print args[0] + ' enabled.'
+
+def enableEditor():
+    for service in editorDeps:
+        enable([service])
+
+def enableReportings():
+    for service in reportingsDeps:
+        enable([service])
+
+def status():
+    for service in services:
+        enabled = isEnabled(service)
+        print service,
+        if isEnabled(service):
+            print 'ENABLED'
+        else:
+            print 'disabled'
+
+commands = {
+    'disable': disable,
+    'enable': enable,
+    'disable-all': lambda args: disableAll(),
+    'enable-editor': lambda args: enableEditor(),
+    'enable-reportings': lambda args: enableReportings(),
+    'status': lambda args: status()
+}
+
+def keys():
+    s = '('
+    ks = commands.keys()
+    ks.sort()
+    for key in ks:
+        if s == '(':
+            s = s + key
+        else:
+            s = s + ', ' + key
+    return s + ')'
+
+if len(sys.argv) < 2:
+    print 'missing command ' + keys()
+    sys.exit(1)
+
+command = sys.argv[1]
+
+if command in commands:
+    commands[command](sys.argv[2:])
+else:
+    print 'Invalid command. ' + keys()

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+lucid-prod dump name:user
+lucid-prod dump name:document
+lucid-prod dump name:$1
